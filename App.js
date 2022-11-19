@@ -1,13 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { NavigationContainer } from "@react-navigation/native";
+import { StyleSheet } from "react-native";
+import UserScreen from "./screens/UserScreen";
+import WelcomeScreen from "./screens/WelcomeScreen";
+
+const Drawer = createDrawerNavigator();
 
 export default function App() {
+  
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Drawer.Navigator screenOptions={{
+        headerStyle:{
+          backgroundColor:'#3c0a6b',
+        },
+        headerTintColor:'white',
+        drawerActiveTintColor:'#68336f',
+        drawerActiveBackgroundColor:'#3c0a6b'
+
+      }}>
+        <Drawer.Screen name='Welcome' component={WelcomeScreen} options={{
+          drawerLabel: 'Welcome Screen',
+          drawerIcon: ({size, color})=>{
+            <Ionicons name='home' color={color} size={size}/>
+          }
+        }}/>
+        <Drawer.Screen name='User' component={UserScreen} options={{
+          drawerLabel: 'User Screen',
+          drawerIcon: ({size, color})=>{
+            <Ionicons name='person' color={color} size={size}/>
+          }
+        }}/>
+      </Drawer.Navigator>
+    </NavigationContainer>
   );
 }
 
